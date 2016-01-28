@@ -24,7 +24,7 @@ public class Statistiche extends ActionSupport{
 	private float media;
 	private String from = null;
 	private String to = null;
-	private List<MotoriDiRicerca> motoriList;
+	private List motoriList;
 	private String arrayForBarChart;
 
 
@@ -51,6 +51,10 @@ public class Statistiche extends ActionSupport{
 		return media;
 	}
 	
+	public String b(){
+		return SUCCESS;
+	}
+	
 	public void prova() throws JSONException{
 		Iterator<Object> itr = resultQuery1.iterator();
 		JSONArray a = new JSONArray();
@@ -68,6 +72,7 @@ public class Statistiche extends ActionSupport{
 		}
 		this.annuncioMotoreList = listAcc;
 		setArrayForBarChart(a.toString().replace("\"", "'"));
+		System.out.println("arrayForBarChart:" + arrayForBarChart);
 		calcoloMedia();
 		System.out.println("lista: " + annuncioMotoreList);
 	}
@@ -97,7 +102,8 @@ public class Statistiche extends ActionSupport{
 		return (acc);
 	}
 
-	public String dateSelezionate() throws JSONException{
+	public String dateSelezionate(){
+		System.out.println("entrato");
 		String from = getFrom();
 		String to = getTo();
 		String id_motore = parseParenthesisSquareToCurve(getMotoriList().toString());
@@ -109,7 +115,12 @@ public class Statistiche extends ActionSupport{
 			this.annuncioMotoreList = manager.query(id_motore);
 		}
 //		calcoloMedia();
-		prova();
+		try {
+			prova();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
 
@@ -171,11 +182,11 @@ public class Statistiche extends ActionSupport{
 		this.to = to;
 	}
 
-	public List<MotoriDiRicerca> getMotoriList() {
+	public List getMotoriList() {
 		return motoriList;
 	}
 
-	public void setMotoriList(List<MotoriDiRicerca> motoriList) {
+	public void setMotoriList(List motoriList) {
 		this.motoriList = motoriList;
 	}
 

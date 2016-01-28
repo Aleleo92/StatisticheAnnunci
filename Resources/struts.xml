@@ -38,7 +38,6 @@
 			method="dateSelezionate">
 			<result name="success">result.jsp</result>
 		</action> -->
-		
 		<action name="cerca" class="it.annunci.statistiche.Statistiche"
 			method="dateSelezionate">
 			<result name="success">result.jsp</result>

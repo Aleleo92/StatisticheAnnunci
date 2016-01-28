@@ -17,10 +17,7 @@ To:
 <title>Statistiche</title>
 <script type="text/javascript"
 	src="http://mbostock.github.com/d3/d3.js?2.1.3"></script>
-<script type="text/javascript"
-	src="http://mbostock.github.com/d3/d3.geom.js?2.1.3"></script>
-<script type="text/javascript"
-	src="http://mbostock.github.com/d3/d3.layout.js?2.1.3"></script>
+
 
 <style type="text/css">
 .slice text {
@@ -116,7 +113,7 @@ body {
 				height + margin.top + margin.bottom).append("g").attr(
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
-		prova = <s:property value="arrayForBarChar" />;
+		prova = <s:property value="arrayForBarChart" />;
 		console.log(prova);
 		data = prova
 			/* JSON.parse(<s:property value="arrayForBarChar" />.replace(/&quot;/g,'"')); */

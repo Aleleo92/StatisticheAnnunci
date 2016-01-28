@@ -9,10 +9,6 @@ import com.opensymphony.xwork2.ActionSupport;
  
 public class MotoriDiRicercaAction extends ActionSupport{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private MotoriDiRicerca motoreDiRicerca;
 	private List<MotoriDiRicerca> motoriList;
 	private int motore; 
@@ -39,6 +35,7 @@ public class MotoriDiRicercaAction extends ActionSupport{
 	}
 	
 	public List<MotoriDiRicerca> getMotoriList() {
+		System.out.println("get");
 		return motoriList;
 	}
 	
@@ -59,6 +56,7 @@ public class MotoriDiRicercaAction extends ActionSupport{
 	}
 
 	public void setMotoriList(List<MotoriDiRicerca> motoriList) {
+		System.out.println("set");
 		this.motoriList = motoriList;
 	}
 

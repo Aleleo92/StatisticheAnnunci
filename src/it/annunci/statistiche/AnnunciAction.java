@@ -5,10 +5,7 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AnnunciAction extends ActionSupport{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private Annunci annunci;
 	private List<Annunci> annunciList;
 	

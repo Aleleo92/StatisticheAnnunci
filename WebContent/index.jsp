@@ -76,7 +76,7 @@
 		</select> --%>
 
 		<s:iterator value="motoriList">
-			<input type="checkbox" name="motoriList" value="${id}">${nome}
+			<input type="checkbox" name="motoriList" value="${id}">${nome}</input>
 			<br>
 		</s:iterator>
 		<br>
