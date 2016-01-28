@@ -35,7 +35,6 @@ public class MotoriDiRicercaAction extends ActionSupport{
 	}
 	
 	public List<MotoriDiRicerca> getMotoriList() {
-		System.out.println("get");
 		return motoriList;
 	}
 	
@@ -56,7 +55,6 @@ public class MotoriDiRicercaAction extends ActionSupport{
 	}
 
 	public void setMotoriList(List<MotoriDiRicerca> motoriList) {
-		System.out.println("set");
 		this.motoriList = motoriList;
 	}
 

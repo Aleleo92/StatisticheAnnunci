@@ -107,21 +107,13 @@ public class Manager extends HibernateUtil {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<Object> listAnnuncioMotore = null;
-		System.out.println("From: " + from + "\tTo: " + to + "\tId_motore: " + id_motore);
 		try {
 
 			listAnnuncioMotore = (List<Object>)session
 					.createQuery("SELECT am, mr.nome, an.data FROM AnnuncioMotore am , MotoriDiRicerca mr , Annunci an WHERE am.id_motore=mr.id AND an.id_annunci=am.id_annunci AND (an.data BETWEEN :from AND :to) AND am.id_motore IN "+ id_motore)
-
-//					.createQuery("SELECT AnnuncioMotore, mr.nome, an.data FROM AnnuncioMotore AS am JOIN MotoriDiRicerca AS mr ON am.id_motore = mr.id JOIN Annunci an ON an.id_annunci = am.id_annunci WHERE (data BETWEEN :from AND :to) AND am.id_motore IN "+ id_motore)
-
-//					.createSQLQuery("select am.*,mr.nome,an.data from annuncio_motore as am join motori_di_ricerca as mr on am.id_motore=mr.id join annunci an on an.id_annunci=am.id_annunci where (data between '2016-1-5' and '2016-1-23') AND am.id_motore IN (1,2)")
 					.setParameter("from", from)
 					.setParameter("to", to)
 					.list();
-//					.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP)
-
-			System.out.println(listAnnuncioMotore);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();

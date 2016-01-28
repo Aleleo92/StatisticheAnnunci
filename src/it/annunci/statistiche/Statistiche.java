@@ -51,10 +51,6 @@ public class Statistiche extends ActionSupport{
 		return media;
 	}
 	
-	public String b(){
-		return SUCCESS;
-	}
-	
 	public void prova() throws JSONException{
 		Iterator<Object> itr = resultQuery1.iterator();
 		JSONArray a = new JSONArray();
@@ -72,53 +68,31 @@ public class Statistiche extends ActionSupport{
 		}
 		this.annuncioMotoreList = listAcc;
 		setArrayForBarChart(a.toString().replace("\"", "'"));
-		System.out.println("arrayForBarChart:" + arrayForBarChart);
 		calcoloMedia();
-		System.out.println("lista: " + annuncioMotoreList);
+
 	}
 
-	public JSONArray transformListToJson(List<AnnuncioMotore> ls) throws JSONException{
-		JSONArray a = new JSONArray();
-		Iterator<AnnuncioMotore> itr = annuncioMotoreList.iterator();
-		while(itr.hasNext()) {
-			AnnuncioMotore el = (AnnuncioMotore) itr.next();
-			JSONObject obj = new JSONObject();
-			obj.put("motori", "prova");
-			obj.put("positive", el.getCandidature_pos()+"");
-			obj.put("negative", el.getCandidature_neg()+"");
-			a.put(obj);
-		}
-		setArrayForBarChart(a.toString().replace("\"", "'"));
-		System.out.println("prove" + arrayForBarChart);
-		return a;
-	}
 	public float mediaArray( float a[]){
 		float acc = 0;
 		for( float x : a ){
 			acc += x;
 		}
 		acc = (float)Math.round((acc / a.length) * 100f) / 100f;
-		System.out.println(acc);
 		return (acc);
 	}
 
 	public String dateSelezionate(){
-		System.out.println("entrato");
 		String from = getFrom();
 		String to = getTo();
 		String id_motore = parseParenthesisSquareToCurve(getMotoriList().toString());
-		System.out.println("ID_MOTORE" + id_motore);
 		if(!(from.isEmpty() || to.isEmpty())){
 			this.resultQuery1 = manager.query1(toDate(from), toDate(to), id_motore);
-			//System.out.println(transformListToJson(annuncioMotoreList));
 		}else{
 			this.annuncioMotoreList = manager.query(id_motore);
 		}
-//		calcoloMedia();
 		try {
 			prova();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return SUCCESS;
@@ -131,8 +105,6 @@ public class Statistiche extends ActionSupport{
 		try {
 
 			date = formatter.parse(stringDate);
-			System.out.println(date);
-			System.out.println(formatter.format(date));
 
 		} catch (ParseException e) {
 			e.printStackTrace();

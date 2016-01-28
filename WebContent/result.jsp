@@ -113,24 +113,9 @@ body {
 				height + margin.top + margin.bottom).append("g").attr(
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
-		prova = <s:property value="arrayForBarChart" />;
-		console.log(prova);
-		data = prova
-			/* JSON.parse(<s:property value="arrayForBarChar" />.replace(/&quot;/g,'"')); */
- 			/* [ {
-			"motori" : "monster",
-			"positive" : "10",
-			"negative" : "5"
-		}, {
-			"motori" : "retsnom",
-			"positive" : "9",
-			"negative" : "6"
-		}, {
-			"motori" : "subito",
-			"positive" : "8",
-			"negative" : "7"
-		}, ];  */
-		console.log(data);
+		
+		data = <s:property value="arrayForBarChart" />;
+
 		var candidaturaMotore = d3.keys(data[0]).filter(function(key) {
 			return key !== "motori";
 		});
