@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<package name="default" extends="struts-default" namespace="/">
+
+		<action name="add" class="it.annunci.statistiche.AnnuncioMotoreAction"
+			method="add">
+			<result name="success" type="chain">index</result>
+			<result name="input" type="chain">index</result>
+		</action>
+
+		<action name="delete" class="it.annunci.statistiche.AnnuncioMotoreAction"
+			method="delete">
+			<result name="success" type="chain">index</result>
+		</action>
+
+		<action name="index" class="it.annunci.statistiche.AnnuncioMotoreAction">
+			<result name="success">index.jsp</result>
+		</action>
+
+		<action name="showMotori" class="it.annunci.statistiche.MotoriDiRicercaAction"
+			method="showMotori">
+			<result name="success">index.jsp</result>
+		</action>
+
+		<action name="showAnnunci" class="it.annunci.statistiche.AnnunciAction"
+			method="showAnnunci">
+			<result name="success">NewFile.jsp</result>
+		</action>
+		
+<!-- 		<action name="query" class="it.annunci.statistiche.Statistiche"
+			method="ricercaPerMotore">
+			<result name="success">result.jsp</result>
+		</action>
+		<action name="selectData" class="it.annunci.statistiche.Statistiche"
+			method="dateSelezionate">
+			<result name="success">result.jsp</result>
+		</action> -->
+		
+		<action name="cerca" class="it.annunci.statistiche.Statistiche"
+			method="dateSelezionate">
+			<result name="success">result.jsp</result>
+		</action>
+	</package>
+</struts>    
