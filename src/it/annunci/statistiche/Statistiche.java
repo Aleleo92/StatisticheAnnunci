@@ -50,11 +50,14 @@ public class Statistiche extends ActionSupport{
 		System.out.println("\n\t" + media);
 		return media;
 	}
-	
+
 	public void prova() throws JSONException{
 		Iterator<Object> itr = resultQuery1.iterator();
 		JSONArray a = new JSONArray();
 		List<AnnuncioMotore> listAcc = new ArrayList<>();
+		List<String> nomi = new ArrayList<>();
+		int pos = 0;
+		int neg = 0;
 		while(itr.hasNext()){
 			JSONObject JSONObj = new JSONObject();
 			Object[] obj = (Object[]) itr.next();
@@ -62,15 +65,53 @@ public class Statistiche extends ActionSupport{
 			listAcc.add(annuncioMotore);
 			String nome = String.valueOf(obj[1]);
 			JSONObj.put("motori", nome);
-			JSONObj.put("positive", annuncioMotore.getCandidature_pos()+"");
-			JSONObj.put("negative", annuncioMotore.getCandidature_neg()+"");
+			JSONObj.put("positive", annuncioMotore.getCandidature_pos());
+			JSONObj.put("negative", annuncioMotore.getCandidature_neg());
+			//			}
 			a.put(JSONObj);
 		}
+		a = cumulate("motori", a);
 		this.annuncioMotoreList = listAcc;
 		setArrayForBarChart(a.toString().replace("\"", "'"));
 		calcoloMedia();
 
 	}
+
+	public JSONArray cumulate(String key, JSONArray jsa) throws JSONException{
+		int l = jsa.length();
+		int pos = 0;
+		int neg = 0;
+		List<String> nomi = new ArrayList<>();
+		JSONArray JSONArray = new JSONArray();
+		String nome = "";
+		for(int i = 0; i < l; i++){
+			nome = jsa.getJSONObject(i).getString(key);
+			if(!nomi.contains(nome)){
+				nomi.add(nome);
+			}
+		}
+		Iterator itr = nomi.iterator();
+		while(itr.hasNext()){
+			String str = (String) itr.next();
+			for(int i = 0; i<l; i++){
+				nome = jsa.getJSONObject(i).getString(key);
+				if(str.equals(nome)){
+					pos += jsa.getJSONObject(i).getInt("positive");
+					neg += jsa.getJSONObject(i).getInt("negative");		
+				}
+			}
+			JSONObject JSONObj = new JSONObject();
+			JSONObj.put("motori", str);
+			JSONObj.put("positive", pos);
+			JSONObj.put("negative", neg );
+			pos = 0;
+			neg = 0;
+			nome = "";
+			JSONArray.put(JSONObj);
+		}
+		return JSONArray;
+	}
+
 
 	public float mediaArray( float a[]){
 		float acc = 0;
