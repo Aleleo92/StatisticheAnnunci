@@ -19,12 +19,12 @@ public class MotoriDiRicercaAction extends ActionSupport{
 		manager = new Manager();
 	}
     
-    public String showMotori() {
-    	String answer = getYourAnswer();
-        this.motoriList = manager.motoriList(answer);
-        System.out.println("execute called");
-        return SUCCESS;
-    }
+//    public String showMotori() {
+//    	String answer = getYourAnswer();
+//        this.motoriList = manager.motoriList(answer);
+//        System.out.println("execute called");
+//        return SUCCESS;
+//    }
     
     public String ricerca() {
     	int motore = getMotore();

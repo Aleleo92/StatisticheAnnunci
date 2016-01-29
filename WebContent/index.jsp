@@ -101,8 +101,8 @@
 		</s:iterator>
 		<br>
 		<div class="date-range">
-			<input type="date" name="from"> <span class="to">to</span> <input
-				type="date" name="to">
+			<input type="date" name="from" max="${dateMax}" min="${dateMin}"> <span class="to">to</span> <input
+				type="date" name="to" max="${dateMax}" min="${dateMin}">
 		</div>
 		<s:submit cssClass="btn btn-primary" value="cerca"></s:submit>
 	</s:form>

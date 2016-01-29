@@ -20,10 +20,15 @@
 			<result name="success">index.jsp</result>
 		</action>
 
-		<action name="showMotori" class="it.annunci.statistiche.MotoriDiRicercaAction"
+<!-- 		<action name="showMotori" class="it.annunci.statistiche.MotoriDiRicercaAction"
+			method="showMotori">
+			<result name="success">index.jsp</result>
+		</action> -->
+		<action name="showMotori" class="it.annunci.statistiche.Statistiche"
 			method="showMotori">
 			<result name="success">index.jsp</result>
 		</action>
+		
 
 		<action name="showAnnunci" class="it.annunci.statistiche.AnnunciAction"
 			method="showAnnunci">

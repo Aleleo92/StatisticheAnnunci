@@ -21,17 +21,32 @@ public class Statistiche extends ActionSupport{
 	private String nomeMotore;
 	private List<Object> resultQuery1;
 	private List<AnnuncioMotore> annuncioMotoreList;
+	private List<Annunci> annunciList;
 	private float media;
 	private String from = null;
 	private String to = null;
 	private List motoriList;
 	private String arrayForBarChart;
+	private String yourAnswer;
+	private String dateMax;
+	private String dateMin;
 
 
 	public Statistiche(){
 		manager = new Manager();
 	}
 
+    public String showMotori() {
+    	String answer = getYourAnswer();
+    	List<Annunci> dateAnnunci = manager.annunciList();
+    	setDateMax(dateAnnunci.get(0).getData().toString());
+    	setDateMin(dateAnnunci.get(dateAnnunci.size() - 1).getData().toString());
+        this.motoriList = manager.motoriList(answer);
+        System.out.println("Max: " + dateMax + "Min: " + dateMin);
+        System.out.println("execute called");
+        return SUCCESS;
+    }
+    
 	public float calcoloMedia(){
 		Iterator<AnnuncioMotore> itr = annuncioMotoreList.iterator();
 		int i = 0;
@@ -225,6 +240,38 @@ public class Statistiche extends ActionSupport{
 
 	public void setResultQuery1(List<Object> resultQuery1) {
 		this.resultQuery1 = resultQuery1;
+	}
+
+	public String getYourAnswer() {
+		return yourAnswer;
+	}
+
+	public void setYourAnswer(String yourAnswer) {
+		this.yourAnswer = yourAnswer;
+	}
+
+	public String getDateMax() {
+		return dateMax;
+	}
+
+	public String getDateMin() {
+		return dateMin;
+	}
+
+	public void setDateMax(String dateMax) {
+		this.dateMax = dateMax;
+	}
+
+	public void setDateMin(String dateMin) {
+		this.dateMin = dateMin;
+	}
+
+	public List<Annunci> getAnnunciList() {
+		return annunciList;
+	}
+
+	public void setAnnunciList(List<Annunci> annunciList) {
+		this.annunciList = annunciList;
 	}
 
 }

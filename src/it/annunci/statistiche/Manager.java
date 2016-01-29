@@ -75,7 +75,7 @@ public class Manager extends HibernateUtil {
 		List<Annunci> list = null;
 		try {
 
-			list = (List<Annunci>)session.createQuery("FROM Annunci").list();
+			list = (List<Annunci>)session.createQuery("FROM Annunci order by data desc").list();
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
