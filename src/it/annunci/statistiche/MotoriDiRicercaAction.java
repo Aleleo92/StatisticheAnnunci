@@ -13,13 +13,15 @@ public class MotoriDiRicercaAction extends ActionSupport{
 	private List<MotoriDiRicerca> motoriList;
 	private int motore; 
 	private Manager manager;
+	private String yourAnswer;
 	
 	public MotoriDiRicercaAction() {
 		manager = new Manager();
 	}
     
     public String showMotori() {
-        this.motoriList = manager.motoriList();
+    	String answer = getYourAnswer();
+        this.motoriList = manager.motoriList(answer);
         System.out.println("execute called");
         return SUCCESS;
     }
@@ -60,6 +62,14 @@ public class MotoriDiRicercaAction extends ActionSupport{
 
 	public void setMotore(int motore) {
 		this.motore = motore;
+	}
+
+	public String getYourAnswer() {
+		return yourAnswer;
+	}
+
+	public void setYourAnswer(String yourAnswer) {
+		this.yourAnswer = yourAnswer;
 	}
 
 

@@ -31,42 +31,62 @@
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #428bca;
-    position: absolute;
-    left: 355px;
-    top: 240px;
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #428bca;
+	position: absolute;
+	left: 355px;
+	top: 240px;
+}
+
+.mostra {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #428bca;
+	position: absolute;
+	left: 250px;
+	top: 75px;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 
 .to {
-    width: 30px;
-    height: 30px;
-    padding: 6px;
-    padding-left: 12px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 23px;
-    color: #FFF;
-    text-align: center;
-    background-color: #428bca;
-    border-top: 1px solid rgba(255, 255, 255, 0);
-    border-bottom: 1px solid rgba(204, 204, 204, 0);
-    border-radius: 4px;
-    padding-right: 12px;
+	width: 30px;
+	height: 30px;
+	padding: 6px;
+	padding-left: 12px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 23px;
+	color: #FFF;
+	text-align: center;
+	background-color: #428bca;
+	border-top: 1px solid rgba(255, 255, 255, 0);
+	border-bottom: 1px solid rgba(204, 204, 204, 0);
+	border-radius: 4px;
+	padding-right: 12px;
 }
 
 .date-range {
-    position: absolute;
-    left: 50px;
-    top: 200px;
+	position: absolute;
+	left: 50px;
+	top: 200px;
 }
-
 </style>
 <h1>Statistiche motori di ricerca</h1>
 <div class="container">
+
 	<s:form action="showMotori">
-		<s:submit value="mostra motori"></s:submit>
+		<%-- <s:submit value="mostra motori"></s:submit> --%>
+		<s:radio label="Mostra motori" name="yourAnswer"
+			list="#{'1':'Tutti','2':'Attivi'}" />
+		<s:submit cssClass="mostra" value="ok" name="mostra" />
 	</s:form>
 	<s:form action="cerca">
 		<%-- <select name="motore" id="menu">
@@ -81,8 +101,8 @@
 		</s:iterator>
 		<br>
 		<div class="date-range">
-			<input type="date" name="from" > <span
-				class="to">to</span> <input type="date" name="to">
+			<input type="date" name="from"> <span class="to">to</span> <input
+				type="date" name="to">
 		</div>
 		<s:submit cssClass="btn btn-primary" value="cerca"></s:submit>
 	</s:form>

@@ -49,14 +49,16 @@ public class Manager extends HibernateUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<MotoriDiRicerca> motoriList() {
+	public List<MotoriDiRicerca> motoriList(String answer) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<MotoriDiRicerca> list = null;
 		try {
-
-			list = (List<MotoriDiRicerca>)session.createQuery("FROM MotoriDiRicerca").list();
-
+			if(answer.equals("2")){
+				list = (List<MotoriDiRicerca>)session.createQuery("FROM MotoriDiRicerca WHERE attivo = '1'").list();
+			}else{
+				list = (List<MotoriDiRicerca>)session.createQuery("FROM MotoriDiRicerca").list();
+			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
