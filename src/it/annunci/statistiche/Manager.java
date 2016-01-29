@@ -123,4 +123,22 @@ public class Manager extends HibernateUtil {
 		session.getTransaction().commit();
 		return listAnnuncioMotore;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<String> nomiMotoriFromId(String id_motore){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<String> list = null;
+		try {
+
+			list = (List<String>)session
+					.createQuery("SELECT nome FROM MotoriDiRicerca WHERE id IN "+ id_motore)
+					.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		session.getTransaction().commit();
+		return list;
+	}
 }

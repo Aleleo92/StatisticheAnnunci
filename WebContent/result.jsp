@@ -1,14 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<h1>Statistiche ${nome}</h1>
-Media:
-<s:property value="media" />
-
-From:
-<s:property value="from" default="all" />
-
-To:
-<s:property value="to" default="all" />
+<h1>
+	Statistiche ${nomiMotoriList} da
+	<s:property value="from" default="all" />
+	a
+	<s:property value="to" default="all" />
+</h1>
 
 <!DOCTYPE html>
 <html>
@@ -26,39 +23,41 @@ To:
 }
 </style>
 </head>
+
 <body>
 	<script type="text/javascript">
-		var w = 450, h = 450, r = 200, color = d3.scale.ordinal().range(
-				[ "#13E012", "#ff0000" ]);
-		data = [ {
-			"label" : "positive",
-			"value" : <s:property value="media" />
-		}, {
-			"label" : "negative",
-			"value" : 1 - <s:property value="media" />
-		}, ];
+			var w = 450, h = 450, r = 200, color = d3.scale.ordinal().range(
+					[ "#98abc5", "#8a89a6" ]);
+			data = [ {
+				"label" : "positive",
+				"value" : <s:property value="media" />
+			}, {
+				"label" : "negative",
+				"value" : 1 - <s:property value="media" />
+			}, ];
 
-		var vis = d3.select("body").append("svg:svg").data([ data ]).attr(
-				"width", w).attr("height", h).append("svg:g").attr("transform",
-				"translate(" + r + "," + r + ")")
-		var arc = d3.svg.arc().outerRadius(r);
-		var pie = d3.layout.pie().value(function(d) {
-			return d.value;
-		});
-		var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g")
-				.attr("class", "slice");
-		arcs.append("svg:path").attr("fill", function(d, i) {
-			return color(i);
-		}).attr("d", arc);
-		arcs.append("svg:text").attr("transform", function(d) {
-			d.innerRadius = 0;
-			d.outerRadius = r;
-			return "translate(" + arc.centroid(d) + ")";
-		}).attr("text-anchor", "middle").text(function(d, i) {
-			return (100 * data[i].value) + '%';
-		});
-	</script>
+			var vis = d3.select("body").append("svg:svg").data([ data ]).attr(
+					"width", w).attr("height", h).append("svg:g").attr(
+					"transform", "translate(" + r + "," + r + ")")
+			var arc = d3.svg.arc().outerRadius(r);
+			var pie = d3.layout.pie().value(function(d) {
+				return d.value;
+			});
+			var arcs = vis.selectAll("g.slice").data(pie).enter().append(
+					"svg:g").attr("class", "slice");
+			arcs.append("svg:path").attr("fill", function(d, i) {
+				return color(i);
+			}).attr("d", arc);
+			arcs.append("svg:text").attr("transform", function(d) {
+				d.innerRadius = 0;
+				d.outerRadius = r;
+				return "translate(" + arc.centroid(d) + ")";
+			}).attr("text-anchor", "middle").text(function(d, i) {
+				return (100 * data[i].value) + '%';
+			});
+		</script>
 </body>
+
 </html>
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -100,7 +99,7 @@ body {
 		var y = d3.scale.linear().range([ height, 0 ]);
 
 		var color = d3.scale.ordinal().range(
-				[ "#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56",
+				[ "#8A89A6", "#98abc5", "#7b6888", "#6b486b", "#a05d56",
 						"#d0743c", "#ff8c00" ]);
 
 		var xAxis = d3.svg.axis().scale(x0).orient("bottom");
@@ -113,7 +112,7 @@ body {
 				height + margin.top + margin.bottom).append("g").attr(
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
-		
+
 		data = <s:property value="arrayForBarChart" />;
 
 		var candidaturaMotore = d3.keys(data[0]).filter(function(key) {
@@ -178,6 +177,4 @@ body {
 				".35em").style("text-anchor", "end").text(function(d) {
 			return d;
 		});
-	
-		
 	</script>

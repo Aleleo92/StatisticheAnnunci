@@ -26,6 +26,7 @@ public class Statistiche extends ActionSupport{
 	private String from = null;
 	private String to = null;
 	private List motoriList;
+	private List nomiMotoriList;
 	private String arrayForBarChart;
 	private String yourAnswer;
 	private String dateMax;
@@ -141,6 +142,7 @@ public class Statistiche extends ActionSupport{
 		String from = getFrom();
 		String to = getTo();
 		String id_motore = parseParenthesisSquareToCurve(getMotoriList().toString());
+		setNomiMotoriList(manager.nomiMotoriFromId(id_motore));
 		if(!(from.isEmpty() || to.isEmpty())){
 			this.resultQuery1 = manager.query1(toDate(from), toDate(to), id_motore);
 		}else{
@@ -272,6 +274,14 @@ public class Statistiche extends ActionSupport{
 
 	public void setAnnunciList(List<Annunci> annunciList) {
 		this.annunciList = annunciList;
+	}
+
+	public List getNomiMotoriList() {
+		return nomiMotoriList;
+	}
+
+	public void setNomiMotoriList(List nomiMotoriList) {
+		this.nomiMotoriList = nomiMotoriList;
 	}
 
 }
