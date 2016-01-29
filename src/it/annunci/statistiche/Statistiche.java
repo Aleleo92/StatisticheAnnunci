@@ -20,6 +20,8 @@ public class Statistiche extends ActionSupport{
 	private String motore;
 	private String nomeMotore;
 	private List<Object> resultQuery1;
+	private List<AnnuncioMotore> resultQueryRange1;
+	private List<AnnuncioMotore> resultQueryRange2;
 	private List<AnnuncioMotore> annuncioMotoreList;
 	private List<Annunci> annunciList;
 	private float media;
@@ -31,10 +33,38 @@ public class Statistiche extends ActionSupport{
 	private String yourAnswer;
 	private String dateMax;
 	private String dateMin;
+	private String cmpFrom2;
+	private String cmpFrom1;
+	private String cmpTo2;
+	private String cmpTo1;
+	private String id;
+	private List range1;
+	private List range2;
 
 
 	public Statistiche(){
 		manager = new Manager();
+	}
+	
+	public String confronto(){
+		this.motoriList = manager.motoriList("2");
+		List<Annunci> dateAnnunci = manager.annunciList();
+		setDateMax(dateAnnunci.get(0).getData().toString());
+    	setDateMin(dateAnnunci.get(dateAnnunci.size() - 1).getData().toString());
+		return SUCCESS;
+	}
+	
+	public String inviaConfronto() throws JSONException{
+		System.out.println("inviaconfronto: " + motore);
+		System.out.println("From1: " + cmpFrom1 + " To1: " + cmpTo1 + "\nFrom2: " + cmpFrom2 + " To2: " + cmpTo2);
+		this.resultQueryRange1 = manager.query2(toDate(cmpFrom1), toDate(cmpTo1), motore );
+
+		this.resultQueryRange2 = manager.query2(toDate(cmpFrom2), toDate(cmpTo2), motore );
+		
+		System.out.println("range1: "+ calcoloSomma(resultQueryRange1) + "range2: " + calcoloSomma(resultQueryRange2));
+		setRange1(calcoloSomma(resultQueryRange1));
+		setRange2(calcoloSomma(resultQueryRange2));
+		return SUCCESS;
 	}
 
     public String showMotori() {
@@ -46,6 +76,21 @@ public class Statistiche extends ActionSupport{
         System.out.println("Max: " + dateMax + "Min: " + dateMin);
         System.out.println("execute called");
         return SUCCESS;
+    }
+    
+    public List<Integer> calcoloSomma(List<AnnuncioMotore> ls ){
+    	Iterator<AnnuncioMotore> itr = ls.iterator();
+    	List<Integer> lista = new ArrayList<>();
+    	int pos = 0;
+    	int neg = 0;
+    	while(itr.hasNext()) {
+			AnnuncioMotore el = itr.next();
+			pos += el.getCandidature_pos();
+			neg += el.getCandidature_neg();
+		}
+    	lista.add(pos);
+    	lista.add(neg);
+		return lista;
     }
     
 	public float calcoloMedia(){
@@ -67,8 +112,8 @@ public class Statistiche extends ActionSupport{
 		return media;
 	}
 
-	public void prova() throws JSONException{
-		Iterator<Object> itr = resultQuery1.iterator();
+	public JSONArray prova(List<Object> ls) throws JSONException{
+		Iterator<Object> itr = ls.iterator();
 		JSONArray a = new JSONArray();
 		List<AnnuncioMotore> listAcc = new ArrayList<>();
 		List<String> nomi = new ArrayList<>();
@@ -90,7 +135,7 @@ public class Statistiche extends ActionSupport{
 		this.annuncioMotoreList = listAcc;
 		setArrayForBarChart(a.toString().replace("\"", "'"));
 		calcoloMedia();
-
+		return a;
 	}
 
 	public JSONArray cumulate(String key, JSONArray jsa) throws JSONException{
@@ -146,7 +191,7 @@ public class Statistiche extends ActionSupport{
 		if(!(from.isEmpty() || to.isEmpty())){
 			this.resultQuery1 = manager.query1(toDate(from), toDate(to), id_motore);
 			try {
-				prova();
+				prova(resultQuery1);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -285,5 +330,63 @@ public class Statistiche extends ActionSupport{
 	public void setNomiMotoriList(List nomiMotoriList) {
 		this.nomiMotoriList = nomiMotoriList;
 	}
+
+	public String getCmpFrom2() {
+		return cmpFrom2;
+	}
+
+	public String getCmpFrom1() {
+		return cmpFrom1;
+	}
+
+	public String getCmpTo2() {
+		return cmpTo2;
+	}
+
+	public String getCmpTo1() {
+		return cmpTo1;
+	}
+
+	public void setCmpFrom2(String cmpFrom2) {
+		this.cmpFrom2 = cmpFrom2;
+	}
+
+	public void setCmpFrom1(String cmpFrom1) {
+		this.cmpFrom1 = cmpFrom1;
+	}
+
+	public void setCmpTo2(String cmpTo2) {
+		this.cmpTo2 = cmpTo2;
+	}
+
+	public void setCmpTo1(String cmpTo1) {
+		this.cmpTo1 = cmpTo1;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public List getRange1() {
+		return range1;
+	}
+
+	public List getRange2() {
+		return range2;
+	}
+
+	public void setRange1(List range1) {
+		this.range1 = range1;
+	}
+
+	public void setRange2(List range2) {
+		this.range2 = range2;
+	}
+
+	
 
 }

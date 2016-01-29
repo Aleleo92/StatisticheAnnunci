@@ -47,5 +47,13 @@
 			method="dateSelezionate">
 			<result name="success">result.jsp</result>
 		</action>
+		<action name="confronto" class="it.annunci.statistiche.Statistiche"
+			method="confronto">
+			<result name="success">confronto.jsp</result>
+		</action>
+		<action name="inviaConfronto" class="it.annunci.statistiche.Statistiche"
+			method="inviaConfronto">
+			<result name="success">graficoConfronto.jsp</result>
+		</action>
 	</package>
 </struts>    

@@ -1,5 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Confronto motore su periodi differenti</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://code.jquery.com/jquery-1.9.1.js"
+	type="text/javascript"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-3d.js"></script>
+<!--     <script src="http://code.highcharts.com/modules/exporting.js" type="text/javascript"></script> -->
+
+</head>
+
 <style type="text/css">
 .container {
 	width: 400px;
@@ -56,23 +69,6 @@
 	border-radius: 4px;
 }
 
-.confronto {
-	    color: #fff;
-    background-color: #337ab7;
-    border-color: #428bca;
-    position: absolute;
-    left: 300px;
-    top: 75px;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
 .to {
 	width: 30px;
 	height: 30px;
@@ -93,38 +89,43 @@
 .date-range {
 	position: absolute;
 	left: 50px;
-	top: 200px;
+	top: 30px;
 }
-</style>
-<h1>Statistiche motori di ricerca</h1>
-<div class="container">
 
-	<s:form action="showMotori">
-		<%-- <s:submit value="mostra motori"></s:submit> --%>
-		<s:radio label="Mostra motori" name="yourAnswer"
-			list="#{'1':'Tutti','2':'Attivi'}" />
-		<s:submit cssClass="mostra" value="ok" name="mostra" />
-	</s:form>
-	<s:form action="cerca">
-		<%-- <select name="motore" id="menu">
+.date-range1 {
+	position: absolute;
+	left: 50px;
+	top: 115px;
+}
+<
+body
+>
+</style>
+<div class="container">
+	<s:form action="inviaConfronto">
+		<select name="motore" id="menu">
 			<s:iterator value="motoriList">
 				<option value="${id}">${nome}</option>
 			</s:iterator>
-		</select> --%>
-
-		<s:iterator value="motoriList">
-			<input type="checkbox" name="motoriList" value="${id}">${nome}</input>
-			<br>
-		</s:iterator>
+		</select>
 		<br>
+
 		<div class="date-range">
-			<input type="date" name="from" max="${dateMax}" min="${dateMin}">
-			<span class="to">to</span> <input type="date" name="to"
+			<h2>Range1</h2>
+			<input type="date" name="cmpFrom1" max="${dateMax}" min="${dateMin}">
+			<span class="to">to</span> <input type="date" name="cmpTo1"
 				max="${dateMax}" min="${dateMin}">
 		</div>
+
+		<div class="date-range1">
+			<h2>Range2</h2>
+			<input type="date" name="cmpFrom2" max="${dateMax}" min="${dateMin}">
+			<span class="to">to</span> <input type="date" name="cmpTo2"
+				max="${dateMax}" min="${dateMin}">
+		</div>
+
 		<s:submit cssClass="btn btn-primary" value="cerca"></s:submit>
 	</s:form>
-	<s:form action="confronto">
-		<s:submit cssClass="confronto" value="confronto"></s:submit>
-	</s:form>
 </div>
+</body>
+</html>

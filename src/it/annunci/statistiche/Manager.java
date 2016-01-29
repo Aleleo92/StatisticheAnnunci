@@ -1,6 +1,7 @@
 package it.annunci.statistiche;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -141,4 +142,25 @@ public class Manager extends HibernateUtil {
 		session.getTransaction().commit();
 		return list;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<AnnuncioMotore> query2(Date from, Date to, String id_motore) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<AnnuncioMotore> listAnnuncioMotore = null;
+		try {
+
+			listAnnuncioMotore = (List<AnnuncioMotore>)session
+					.createQuery("SELECT am FROM AnnuncioMotore am , MotoriDiRicerca mr , Annunci an WHERE am.id_motore=mr.id AND an.id_annunci=am.id_annunci AND (an.data BETWEEN :from AND :to) AND am.id_motore IN "+ id_motore)
+					.setParameter("from", from)
+					.setParameter("to", to)
+					.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		session.getTransaction().commit();
+		return listAnnuncioMotore;
+	}
+	
 }
