@@ -145,14 +145,16 @@ public class Statistiche extends ActionSupport{
 		setNomiMotoriList(manager.nomiMotoriFromId(id_motore));
 		if(!(from.isEmpty() || to.isEmpty())){
 			this.resultQuery1 = manager.query1(toDate(from), toDate(to), id_motore);
+			try {
+				prova();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}else{
 			this.annuncioMotoreList = manager.query(id_motore);
+			calcoloMedia();
 		}
-		try {
-			prova();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	
 		return SUCCESS;
 	}
 
