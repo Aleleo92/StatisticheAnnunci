@@ -65,8 +65,6 @@
 </script>
 </head>
 <body>
-	<s:property value="range1" id="range1" default="all" />
-	<s:property value="range2" default="all" />
 	<div id="container"
 		style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 </body>

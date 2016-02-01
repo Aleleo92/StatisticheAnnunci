@@ -53,7 +53,7 @@
 				d.outerRadius = r;
 				return "translate(" + arc.centroid(d) + ")";
 			}).attr("text-anchor", "middle").text(function(d, i) {
-				return (100 * data[i].value) + '%';
+				return (100 * data[i].value).toFixed(2) + '%';
 			});
 		</script>
 </body>
