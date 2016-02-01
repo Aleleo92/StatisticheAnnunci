@@ -38,8 +38,8 @@ public class Statistiche extends ActionSupport{
 	private String cmpTo2;
 	private String cmpTo1;
 	private String id;
-	private List range1;
-	private List range2;
+	private List<Integer> range1;
+	private List<Integer> range2;
 
 
 	public Statistiche(){
@@ -371,21 +371,22 @@ public class Statistiche extends ActionSupport{
 		this.id = id;
 	}
 
-	public List getRange1() {
+	public List<Integer> getRange1() {
 		return range1;
 	}
 
-	public List getRange2() {
-		return range2;
-	}
-
-	public void setRange1(List range1) {
+	public void setRange1(List<Integer> range1) {
 		this.range1 = range1;
 	}
 
-	public void setRange2(List range2) {
+	public List<Integer> getRange2() {
+		return range2;
+	}
+
+	public void setRange2(List<Integer> range2) {
 		this.range2 = range2;
 	}
+
 
 	
 

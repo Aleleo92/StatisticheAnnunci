@@ -51,9 +51,13 @@
 			method="confronto">
 			<result name="success">confronto.jsp</result>
 		</action>
-		<action name="inviaConfronto" class="it.annunci.statistiche.Statistiche"
+		<!-- <action name="inviaConfronto" class="it.annunci.statistiche.Statistiche"
 			method="inviaConfronto">
 			<result name="success">graficoConfronto.jsp</result>
+		</action> -->
+		<action name="inviaConfronto" class="it.annunci.statistiche.Statistiche"
+			method="inviaConfronto">
+			<result name="success">3Dgraph.jsp</result>
 		</action>
 	</package>
 </struts>    

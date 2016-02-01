@@ -14,6 +14,7 @@ var a = '${range1}';
 var b = '${range2}'
 alert('Endpoint: '+ a);
     $(function () {
+    	var chart = new Highcharts.Chart(options);
         $('#container').highcharts({
             chart: {
                 type: 'column',
@@ -21,7 +22,7 @@ alert('Endpoint: '+ a);
                 options3d: {
     				enabled: true,
                     alpha: 15,
-                    beta: 15,
+                    beta: 30,
                     depth: 110
                 }
             },
