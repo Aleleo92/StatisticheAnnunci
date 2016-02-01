@@ -12,6 +12,13 @@
 <script type="text/javascript">
 	var range1 = ${range1};
 	var range2 = ${range2};
+	var from1 = '${cmpFrom1}'.substring(5);
+	var from2 = '${cmpFrom2}'.substring(5);
+	var to1 = '${cmpTo1}'.substring(5);
+	var to2 = '${cmpTo2}'.substring(5);
+	var strRange1 = from1 +  ' to ' + to1; 
+ 	var strRange2 = from2 + ' to ' + to2;
+
 	$(document).ready(function() {
 		var chart1 = new Highcharts.Chart({
 			chart : {
@@ -45,11 +52,11 @@
 				}
 			},
 			series : [ {
-				name : 'Range 1',
+				name : strRange1,
 				data : range1,
 				stack : 0
 			}, {
-				name : 'Range 2',
+				name : strRange2,
 				data : range2,
 				stack : 1
 			} ]
